@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 const pkg = require("../../package.json");
 
+/* 
+ We're using a version from our package.json file to check if the client is on an old tab and needs to be refreshed.
+  This is useful for when we deploy a new version and we want to make sure the user is not going to be requesting old static assets js/css etc.
+  which may result in broken behavior. We're using the version from the package.json but this could be anything, i.e. a uuid from a static file that's 
+  generated on every deploy etc.
+*/
+
 const useSkewProtection = () => {
   const [windowVersion, setWindowVersion] = useState<string | null>(null);
   const [version, setVersion] = useState<string | null>(pkg.version);
